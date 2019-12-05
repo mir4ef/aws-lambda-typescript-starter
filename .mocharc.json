@@ -1,0 +1,9 @@
+{
+  "check-leaks": true,
+  "extension": [
+    "js"
+  ],
+  "spec": [
+    "./build/tests/unit/**/*.spec.js"
+  ]
+}

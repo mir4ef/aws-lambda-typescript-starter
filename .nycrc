@@ -1,0 +1,31 @@
+{
+  "include": [
+    "src/**/*.ts",
+    "build/src/**/*.js",
+    "build/tests/unit/**/*.js"
+  ],
+  "exclude": [
+    "**/*.d.ts",
+    "**/index.ts"
+  ],
+  "extension": [
+    ".ts",
+    ".js"
+  ],
+  "require": [
+    "ts-node/register",
+    "source-map-support/register"
+  ],
+  "reporter": [
+    "lcov",
+    "html",
+    "text-summary"
+  ],
+  "cache": true,
+  "all": true,
+  "sourceMap": true,
+  "instrument": true,
+  "skip-full": false,
+  "report-dir": "./coverage/",
+  "temp-dir": "./coverage/.nyc_output/"
+}

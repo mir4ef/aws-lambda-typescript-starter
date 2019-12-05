@@ -1,0 +1,66 @@
+{
+  "name": "lambda_hello_world_starter",
+  "version": "1.0.0",
+  "description": "hello world sample for NodeJS written in TypeScript",
+  "repository": "https://github.com/mir4ef/aws-lambda-typescript-starter",
+  "bugs": {
+    "url": "https://github.com/mir4ef/aws-lambda-typescript-starter/issues"
+  },
+  "engines": {
+    "node": "~10.x",
+    "npm": "~6.x"
+  },
+  "main": "dist/app/function.js",
+  "directories": {
+    "app": "src"
+  },
+  "author": "Miro",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./node_modules/wait-on/bin/wait-on dist/app/function.js && sam local start-api -t ./template.yaml",
+    "start:watch": "npm run pre-build && concurrently -k -n \"build,server\" -c \"magenta.bgBlack,cyan.bgBlack\" \"npm run compile:watch\" \"npm start\"",
+    "pre-build": "node ./node_modules/del-cli/cli.js \"./dist\" && npm run copy:package:files && cd ./dist && npm install --production",
+    "build": "npm run pre-build && npm run compile",
+    "compile": "node ./node_modules/typescript/bin/tsc --build ./tsconfig.json",
+    "compile:watch": "node ./node_modules/typescript/bin/tsc --build ./tsconfig.json -w",
+    "copy:package:files": "node ./node_modules/copyfiles/copyfiles -f \"./package*.json\" ./dist/ && node ./node_modules/copyfiles/copyfiles -f \"./.npmignore\" ./dist/",
+    "lint": "node ./node_modules/tslint/bin/tslint -p tsconfig.json -c tslint.json --fix ./src/**/*.ts && echo \"--- completed lint task ---\"",
+    "pre-test": "node ./node_modules/del-cli/cli.js \"./build\"",
+    "test:build": "node ./node_modules/typescript/bin/tsc -p ./tsconfig.spec.json",
+    "test": "npm run pre-test && npm run test:build && node ./node_modules/mocha/bin/mocha",
+    "test:coverage": "npm run pre-test && npm run test:build && node ./node_modules/nyc/bin/nyc.js ./node_modules/mocha/bin/mocha",
+    "security:scan": "npm audit && node ./node_modules/lockfile-lint/bin/lockfile-lint.js --path package-lock.json --type npm --validate-https --allowed-hosts npm"
+  },
+  "pre-commit": [
+    "lint",
+    "security:scan"
+  ],
+  "pre-push": [
+    "test",
+    "build"
+  ],
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.36",
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.14",
+    "aws-lambda": "^0.1.2",
+    "chai": "^4.2.0",
+    "concurrently": "^5.0.0",
+    "copyfiles": "^2.1.1",
+    "del-cli": "^3.0.0",
+    "lockfile-lint": "^3.0.3",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
+    "source-map-support": "^0.5.16",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "wait-on": "^3.3.0"
+  }
+}

@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS
+
+  Sample SAM Template for AWS
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs10.x
+#    Runtime: nodejs12.x
+    CodeUri: dist/ # it could be an S3 bucket location (.zip)
+#    DeadLetterQueue:
+#    Description:
+#    MemorySize:
+#    Environment:
+#    Tags:
+#    Tracing:
+
+Api:
+#  # Properties of AWS::Serverless::Api
+#  # Also works with Implicit APIs
+#  Auth:
+#  Name:
+#  DefinitionUri:
+#  EndpointConfiguration:
+#  MethodSettings:
+  Cors:
+    AllowMethods: "'GET,POST,DELETE'"
+    AllowHeaders: "'X-Forwarded-For'"
+#    AllowOrigin: "*.my-domain.com"
+#  GatewayResponses:
+#  TracingEnabled:
+#  OpenApiVersion:
+  MinimumCompressionSize: 1024
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: Hello World
+      Description: Hello world function
+#      CodeUri: dist/functions
+      Handler: app/function.lambdaHandler
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /api/v1/hello
+            Method: get
+
+  MyFunctrion:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: My Function
+      Description: My function expirements
+#      CodeUri: dist/
+      Handler: my-function/function.lambdaHandler
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /api/v2/hello
+            Method: get
+
+  MyFunc:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: My Func
+      Description: My function expirement with POST
+#      CodeUri: dist/
+      Handler: func/function.lambdaHandler
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /api/v1/world
+            Method: post
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn

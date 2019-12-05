@@ -1,0 +1,7 @@
+.aws-sam
+build
+coverage
+events
+node_modules
+src
+tests
