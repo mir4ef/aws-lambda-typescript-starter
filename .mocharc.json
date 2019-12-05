@@ -3,6 +3,9 @@
   "extension": [
     "js"
   ],
+  "require": [
+    "./tests/setup.js"
+  ],
   "spec": [
     "./build/tests/unit/**/*.spec.js"
   ]
