@@ -5,7 +5,7 @@ import {
   Callback,
   Context,
 } from 'aws-lambda';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import {
   LambdaProxyHandler,
@@ -29,7 +29,7 @@ let response: APIGatewayProxyResult;
  */
 const handler = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
   try {
-    const ret = await axios.get(url);
+    const ret: AxiosResponse = await axios.get(url);
     response = {
       statusCode: 200,
       body: JSON.stringify({
