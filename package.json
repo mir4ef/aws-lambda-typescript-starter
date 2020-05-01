@@ -43,24 +43,24 @@
     "axios": "^0.19.2"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.46",
-    "@types/chai": "^4.2.10",
-    "@types/mocha": "^7.0.1",
-    "@types/node": "^13.7.7",
-    "aws-lambda": "^1.0.5",
+    "@types/aws-lambda": "^8.10.51",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.4",
+    "aws-lambda": "^1.0.6",
     "chai": "^4.2.0",
-    "concurrently": "^5.1.0",
+    "concurrently": "^5.2.0",
     "copyfiles": "^2.2.0",
     "del-cli": "^3.0.0",
-    "lockfile-lint": "^4.0.0",
-    "mocha": "^7.1.0",
-    "nyc": "^15.0.0",
+    "lockfile-lint": "^4.2.2",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
-    "source-map-support": "^0.5.16",
-    "ts-node": "^8.6.2",
-    "tslint": "^6.0.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^8.9.1",
+    "tslint": "^6.1.2",
     "typescript": "^3.8.3",
-    "wait-on": "^4.0.1"
+    "wait-on": "^4.0.2"
   }
 }
